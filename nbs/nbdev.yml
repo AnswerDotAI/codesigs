@@ -1,0 +1,9 @@
+project:
+  output-dir: _docs
+
+website:
+  title: "codesigs"
+  site-url: "https://AnswerDotAI.github.io/codesigs"
+  description: "Extract function and method signatures from source code across multiple languages."
+  repo-branch: main
+  repo-url: "https://github.com/AnswerDotAI/codesigs"
