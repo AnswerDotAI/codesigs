@@ -144,4 +144,6 @@ def ext_sigs(src, ext):
 def file_sigs(fname):
     "Read file content and retrieve signatures"
     fname = Path(fname).expanduser()
-    return ext_sigs(fname.read_text(), fname.suffix)
+    try: s = fname.read_text()
+    except UnicodeDecodeError: return []
+    return ext_sigs(s, fname.suffix)
