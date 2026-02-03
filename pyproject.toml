@@ -28,4 +28,3 @@ version = {attr = "codesigs.__version__"}
 include = ["codesigs"]
 
 [tool.nbdev]
-custom_sidebar = false
