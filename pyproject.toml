@@ -28,3 +28,4 @@ version = {attr = "codesigs.__version__"}
 include = ["codesigs"]
 
 [tool.nbdev]
+allowed_metadata_keys = ['solveit_dialog_mode', 'solveit_ver']
