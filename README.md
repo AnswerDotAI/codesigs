@@ -5,21 +5,14 @@
 
 ## About `codesigs`
 
-`codesigs` extracts function and method signatures from source code
-across over a dozen programming languages. It uses
-[ast-grep](https://ast-grep.github.io/) for most languages and Python’s
-built-in `ast` module for Python files, providing accurate syntax-aware
-parsing rather than brittle regex matching.
+`codesigs` extracts function and method signatures from source code across over a dozen programming languages. It uses [ast-grep](https://ast-grep.github.io/) for most languages and Python’s built-in `ast` module for Python files, providing accurate syntax-aware parsing rather than brittle regex matching.
 
 This is useful for:
 
-- **Documentation generation** - quickly summarize the public API of a
-  codebase
+- **Documentation generation** - quickly summarize the public API of a codebase
 - **Code search and navigation** - find functions by signature pattern
-- **LLM context preparation** - provide compact API summaries to
-  language models without including full implementations
-- **Codebase analysis** - understand the structure of unfamiliar
-  projects
+- **LLM context preparation** - provide compact API summaries to language models without including full implementations
+- **Codebase analysis** - understand the structure of unfamiliar projects
 
 ## Installation
 
@@ -31,8 +24,7 @@ $ pip install codesigs
 
 ## How to use
 
-Pass source code to a language-specific function to get a list of
-signatures:
+Pass source code to a language-specific function to get a list of signatures:
 
 ``` python
 sigs = py_sigs("""
@@ -52,9 +44,7 @@ for o in sigs: print(o)
     class Calculator: ...
         def add(self, a, b): ...
 
-Use
-[`ext_sigs`](https://AnswerDotAI.github.io/codesigs/core.html#ext_sigs)
-when you have source code and know the file extension:
+Use [`ext_sigs`](https://AnswerDotAI.github.io/codesigs/core.html#ext_sigs) when you have source code and know the file extension:
 
 ``` python
 ext_sigs("function greet(name) { return `Hello ${name}`; }", ".js")
@@ -62,23 +52,18 @@ ext_sigs("function greet(name) { return `Hello ${name}`; }", ".js")
 
     ['function greet(name) {...}']
 
-Or use
-[`file_sigs`](https://AnswerDotAI.github.io/codesigs/core.html#file_sigs)
-to read and extract signatures from a file in one step:
+Or use [`file_sigs`](https://AnswerDotAI.github.io/codesigs/core.html#file_sigs) to read and extract signatures from a file in one step:
 
 ``` python
-file_sigs('../codesigs/core.py')[:3]
+for o in file_sigs('../codesigs/core.py')[:5]: print(o)
 ```
 
-    ['def get_docstring(node, lines):\n    "Get docstring from source lines if present" ...',
-     'def _node_sig(node, lines): ...',
-     'def py_sigs(src):\n    "Extract class/function/method signatures from Python source" ...']
+    def get_docstring(node, lines):
+        "Get docstring from source lines if present" ...
+    def _node_sig(node, lines): ...
+    def py_sigs(src):
+        "Extract class/function/method signatures from Python source" ...
+        def _collect(nodes): ...
+    def _get_sigs(src, lang, kinds, name_kind, params_kind, fmt): ...
 
-The package supports Python, JavaScript/TypeScript, Java, Rust, C#, CSS,
-Go, Ruby, PHP, Kotlin, Swift, and Lua. Each language has a dedicated
-function
-(e.g. [`js_sigs`](https://AnswerDotAI.github.io/codesigs/core.html#js_sigs),
-[`rust_sigs`](https://AnswerDotAI.github.io/codesigs/core.html#rust_sigs)),
-or use
-[`ext_sigs`](https://AnswerDotAI.github.io/codesigs/core.html#ext_sigs)/[`file_sigs`](https://AnswerDotAI.github.io/codesigs/core.html#file_sigs)
-which auto-detect from the extension.
+The package supports Python, JavaScript/TypeScript, Java, Rust, C#, CSS, Go, Ruby, PHP, Kotlin, Swift, and Lua. Each language has a dedicated function (e.g. [`js_sigs`](https://AnswerDotAI.github.io/codesigs/core.html#js_sigs), [`rust_sigs`](https://AnswerDotAI.github.io/codesigs/core.html#rust_sigs)), or use [`ext_sigs`](https://AnswerDotAI.github.io/codesigs/core.html#ext_sigs)/[`file_sigs`](https://AnswerDotAI.github.io/codesigs/core.html#file_sigs) which auto-detect from the extension.
